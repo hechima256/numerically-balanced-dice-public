@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x5352;&#x696d;&#x7814;&#x7a76;&#x30d7;&#x30ed;&#x30b0;&#x30e9;&#x30e0;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="卒業研究プログラム">卒業研究プログラム</h1>
+<p>2023年度 木村の卒業研究「凸等面多面体における数均衡ダイスの数え上げ」で作成したC++のプログラム</p>
+<p>設定した立体について数均衡ダイスの各制約を満たす配置とその数を求めることができる。
+全ての配置を総当たりでチェックする方法と、バックトラック法(反対面のみ)が実装してある。</p>
+<p>本資料およびプログラムは、先に卒研発表の配布資料をみてから読むことを推奨する。</p>
+<hr>
+<h2 id="動作環境">動作環境</h2>
+<p>solとmacOS 14.2 (Intel/Apple Silicon)で動作することを確認済み。
+前提ツールはg++とmake。C++11をサポートしているバージョンを使用してください。</p>
+<h2 id="コンパイル">コンパイル</h2>
+<p>makeが使えるなら</p>
+<pre><code>$ make
+</code></pre>
+<p>と実行するだけ。するとmainという実行ファイルが生成される。</p>
+<h2 id="実行方法">実行方法</h2>
+<pre><code>$ ./main
+</code></pre>
+<p>と実行すると</p>
+<pre><code>...
+(略)
+...
+configuration: 1, 7, 2, 8, 3, 6, 4, 5, 
+O: 0
+V: 1
+F: 0
+configuration: 1, 7, 2, 8, 5, 4, 6, 3, 
+O: 0
+V: 1
+F: 0
+configuration: 1, 8, 2, 7, 4, 6, 3, 5, 
+O: 0
+V: 1
+F: 0
+configuration: 1, 8, 2, 7, 6, 4, 5, 3, 
+O: 0
+V: 1
+F: 0
+configuration: 1, 8, 3, 6, 7, 4, 5, 2, 
+O: 0
+V: 1
+F: 0
+O: 16, V: 6, F: 0, OV: 0, VF: 0, OF: 0, OVF: 0
+number of configurations: 1680
+</code></pre>
+<p>のように出力される。(これは正八面体の場合)
+最後の2行が集計結果。(<a href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E3%81%AE%E5%87%BA%E5%8A%9B%E3%81%A8%E5%86%85%E9%83%A8%E5%87%A6%E7%90%86">注意</a>)
+O: 反対面制約を満たす配置数, V: 均衡頂点制約を満たす配置数, F: 均衡面制約を満たす配置数, OVなどの2文字以上のところはそれぞれ制約を同時に満たしている配置数を表す。
+number of configurations は調べた配置の数を表す。</p>
+<p>その上の行には</p>
+<pre><code>configuration(配置): id0の面の数字, id2の面の数字, ..., id(n-1)の面の数字
+O: 反対面制約を満たすか(満たすなら1,満たさなければ0)
+V: 均衡頂点制約を満たすか
+F: 均衡面制約を満たすか
+</code></pre>
+<p>の形式でいずれかの制約を満たす配置すべてについて表示される。
+idの振り方などは<a href="#%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0">データ構造</a>を参照。</p>
+<h2 id="立体の変え方バックトラック法の実行">立体の変え方・バックトラック法の実行</h2>
+<p>main.cppのmain関数(143行目)内で、</p>
+<pre><code>    d.create_polyhedron(OCTA);
+    
+    brute_force(&amp;d);
+    // back_track(&amp;d);
+</code></pre>
+<p><code>d.create_polyhedron(OCTA)</code>を<code>d.create_polyhedron(CUBE)</code>のように変えると立方体について実行できる。作成済みの立体はdice.hに記述してある。
+また、<code>brute_force(&amp;d)</code>をコメントアウトして、<code>back_track(&amp;d)</code>をコメントインするとバックトラック法(反対面制約のみ)で実行できる。バックトラック法の方は集計機能がないので、行数を数えるか自分で実装してください。</p>
+<h2 id="データ構造">データ構造</h2>
+<p>面や辺の隣接関係(位相構造)を扱うためにWinged-Edgeというデータ構造を使用している。(詳しくは論文や発表資料を参照)
+辺に主眼をおいた表現方法であり、eはv, e_prev, e_next, sym, fへの参照を保持する。
+<img src="file:////Users/hechima/Documents/卒業研究/program/img/winged-edge.png" alt="winged-edge"></p>
+<!-- <img width="50%" src="file:////Users/hechima/Documents/卒業研究/program/img/winged-edge.png"> -->
+<p>サイコロと辺、面、頂点はクラスで実装している。
+クラス図は以下である。ただしメソッドは除外してある。
+<img src="file:////Users/hechima/Documents/卒業研究/program/img/diceclass.png" alt="classimg"></p>
+<p>立体をプログラム上で登録する手続きは、dice.cpp内のcreate_polyhedron関数に書いてある。</p>
+<ol>
+<li>init(辺数,頂点数,面数)で立体を初期化</li>
+<li>回転対称性(ただし面の中心を垂直に通る直線を軸として, k回転対象のk)を登録</li>
+<li>辺のidと関連する要素(v, e_prev, symなど)のidを紐付け</li>
+<li>反対面を登録(片方からのみで良い, id0-&gt;id6と登録すればid6-&gt;id0は自動)</li>
+</ol>
+<p>とするが、3番のidの付け方は以下の方法で決める。
+例として立方体で説明する。右下の図のように番号をつけることを目標とする。
+<img src="file:////Users/hechima/Documents/卒業研究/program/img/cube.png" alt="">
+まず、立体の展開図を各面ごとに分解し、
+面を左回りに囲うように有向辺を描く。展開図組み立てるとつながる辺は赤い点線のように接続を描いておく。
+次に、以下の手順で面のid(黒字)を決める。制約があるので気を付けること。</p>
+<ol>
+<li>id:0番は好きな面にする</li>
+<li>立体に反対面がある場合、面数をnとしてid:n-1番は、id0の反対面にする</li>
+<li>(id0の面の中心を垂直に通る軸に対して回転対称性があれば)(正多面体であれば) 軸を囲うようにid1番から残りの番号を順番につける(<a href="#%E5%9B%9E%E8%BB%A2%E5%AF%BE%E7%A7%B0%E9%83%A8%E5%88%86%E3%81%AE%E9%9D%A2%E3%81%AEid">後述にも注意</a>)</li>
+<li>上記の回転対称性がなければ(正多面体でなければ)残りの番号を好きにつける。</li>
+</ol>
+<p>そして、有向辺のid(赤字)を0番から自由につける。(でも規則性を持たせると後で入力しやすい)
+最後に頂点のid(青字)を0番から自由につける。組み立た立体上で同じ頂点は同じ番号にすることに注意！</p>
+<p>上記によって決めたidを使って、setEdge関数で各辺に対し(辺id, 辺の始点となる頂点id, 左の面id, 向かってくる辺id, 出ていく辺id, 向きが逆の辺id)を登録する。</p>
+<p>その他の立体の登録情報はdice.cppにハードコードしてある。(行儀が悪い)
+また、idを割り振った展開図は<a href="./img/input_data.pdf">こちらのPDF</a>にある。</p>
+<h2 id="各ファイルの内容">各ファイルの内容</h2>
+<p>クラスごとにファイル(.cppと.h)の組を作っている。</p>
+<ul>
+<li>サイコロ: dice.(cpp, h)</li>
+<li>辺: edge.(cpp, h)</li>
+<li>面: face.(cpp, h)</li>
+<li>頂点: vertex.(cpp, h)</li>
+<li>数え上げ: main.cpp</li>
+<li>一部の実行結果: results/</li>
+</ul>
+<p>基本的に変数、関数の説明などは各ヘッダファイルに書かれている。</p>
+<h2 id="注意すべき点">注意すべき点</h2>
+<h3 id="回転対称部分の面のid">回転対称部分の面のid</h3>
+<p>回転対称部分の数字の並びが同一の順番でなければいけない。例えば、正八面体だと、id0の面の中心を垂直に通る軸に対して3回転対称で、下図の(id1,id2)、つまり(逆三角, 三角)の部分が回転によって繰り返し現れる回転対称部分である。したがって、次のid:3,4は、(逆三角, 三角)に対応する順でつけなければならず、(id4,id3)の順ではいけない。
+これは正多面体のときのみ注意する必要がある。(正多面体はすでに実装してあるが何か手を加えるなら)
+<img src="file:////Users/hechima/Documents/卒業研究/program/img/k-fold.png" alt=""></p>
+<h3 id="反対面がない場合の反対面制約">反対面がない場合の反対面制約</h3>
+<p>立体に反対面が存在しない場合、命題論理の考えからすべての配置で「反対面制約を満たす」とするべきである。本プログラムもそのように設計してあるが、そのまま実行すると全ての配置が出力され他の結果が見づらいので、立体に反対面がない時のみ反対面制約のみを満たす配置のカウントを除外すると良い。
+また、バックトラック法の場合だと実行時エラーになる。</p>
+<h3 id="面の数字の割り当て">面の数字の割り当て</h3>
+<p>凸等面多面体の対称性から、id0の面のダイスの目の数字は1に固定してある。</p>
+<h3 id="実行時間">実行時間</h3>
+<p>正二十面体だと総当たり法では途方も無い。バックトラックで1,2時間程度。
+結果はファイルにリダイレクトするとあとから見返せて良い。</p>
+<h3 id="配置数の出力と内部処理">配置数の出力と内部処理</h3>
+<p>プログラムの出力の各項目は「少なくともその制約は満たしている配置の数」を表示している。
+一方でプログラム内部のカウントの仕方は「その制約のみを満たす配置の数」をカウントして、最後に足している。(main.cpp内print_sum関数を参照)
+例えば、OVの項目の数字は、(反対面制約を満たし、均衡頂点制約を満たし、均衡面制約は満たさない)配置数と、全ての制約を満たす配置数を足して表示している。</p>
+<h2 id="変更したほうが良い点">変更したほうが良い点</h2>
+<ul>
+<li>バックトラック法の実装(全部書き直すことを推奨。今の実装だとV,F制約を扱いづらいことがわかった)</li>
+<li>コマンドラインから立体等を指定できるように</li>
+<li>立体の設定はハードコーディングじゃなくて他のファイル(CSVなど)に数字だけ書いて、プログラムから読み取る形式にした方がよい</li>
+</ul>
+<h2 id="その他">その他</h2>
+<p>不明な点があれば、木村(<a href="mailto:hiroki.kimura64@gmail.com">hiroki.kimura64@gmail.com</a>)か、ChatGPTに聞いてください。</p>
+<h2 id="license">License</h2>
+<p>本プログラムは研究目的に限り自由に使用可。</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
